@@ -3,6 +3,7 @@ package com.aaronnazareth.car;
 public enum Brand {
     TESLA,
     FORD,
-    BMW,
+    MINI,
+    LAMBO,
     HONDA
 }

@@ -3,12 +3,15 @@ package com.aaronnazareth.car;
 import java.util.Objects;
 
 public class Car {
+
     private Integer id;
+    private String regNumber;
     private Brand brand;
     private Double price;
 
-    public Car(Integer id, Brand brand, Double price) {
+    public Car(Integer id, String regNumber, Brand brand, Double price) {
         this.id = id;
+        this.regNumber = regNumber;
         this.brand = brand;
         this.price = price;
     }
@@ -37,10 +40,19 @@ public class Car {
         this.price = price;
     }
 
+    public String getRegNumber() {
+        return regNumber;
+    }
+
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "id=" + id +
+                ", regNumber='" + regNumber + '\'' +
                 ", brand=" + brand +
                 ", price=" + price +
                 '}';
@@ -51,11 +63,11 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(id, car.id) && brand == car.brand && Objects.equals(price, car.price);
+        return Objects.equals(id, car.id) && Objects.equals(regNumber, car.regNumber) && brand == car.brand && Objects.equals(price, car.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brand, price);
+        return Objects.hash(id, regNumber, brand, price);
     }
 }

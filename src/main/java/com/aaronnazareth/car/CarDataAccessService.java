@@ -1,38 +1,34 @@
 package com.aaronnazareth.car;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository("fake")
-public class FakeCarDataAccessService implements CarDAO {
+@Repository("postgres")
+public class CarDataAccessService implements CarDAO {
 
-    private List<Car> db;
+    private JdbcTemplate jdbcTemplate;
 
-    public FakeCarDataAccessService() {
-        this.db = new ArrayList<>();
+    public CarDataAccessService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public Car selectCarById(Integer id) {
-        for (Car car : db) {
-            if (car.getId().equals(id)) {
-                return car;
-            }
-        }
         return null;
     }
 
     @Override
     public List<Car> selectAllCars() {
-        return db;
+        return List.of(
+                new Car(1, "fobar", Brand.HONDA, 12000.00)
+        );
     }
 
     @Override
     public int insertCar(Car car) {
-        db.add(car);
-        return 1;
+        return 0;
     }
 
     @Override
