@@ -14,7 +14,7 @@ public class CarService {
         this.carDAO = carDAO;
     }
 
-    public void registerNewCar(Car car) {
+    public void insertCar(Car car) {
         // business logic. check if reg number is valid and not take
         if (car.getPrice() <= 0) {
             throw new IllegalStateException("Car price cannot be 0 or less");
@@ -30,14 +30,34 @@ public class CarService {
         return carDAO.selectAllCars();
     }
 
-    public Car getCarById(Integer carId) {
-        return checkCarIDExists(carId);
+    public Car getCarById(Integer id) {
+        return checkCarIDExists(id);
     }
 
-    private Car checkCarIDExists(Integer carId) {
-        Car car = carDAO.selectCarById(carId);
+    public void deleteCar(Integer id) {
+        checkCarIDExists(id);
+
+        int result = carDAO.deleteCar(id);
+
+        if (result != -1) {
+            throw new IllegalStateException("Could not delete car...");
+        }
+    }
+
+    public void updateCar(Integer id, Car update) {
+        checkCarIDExists(id);
+
+        int result = carDAO.updateCar(id, update);
+
+        if (result != 0) {
+            throw new IllegalStateException("Could not update car...");
+        }
+    }
+
+    private Car checkCarIDExists(Integer id) {
+        Car car = carDAO.selectCarById(id);
         if (car == null) {
-            throw new IllegalStateException("Car ID not found within our database");
+            throw new CarNotFoundException("Car ID not found within our database");
         }
         return car;
     }
