@@ -54,7 +54,8 @@ public class CarService {
         }
     }
 
-    private Car checkCarIDExists(Integer id) {
+    private Car checkCarIDExists(Integer id) {  // Create a reusable private method that checks for the existence of
+        // a car id, then returns the car if it exists.
         Car car = carDAO.selectCarById(id);
         if (car == null) {
             throw new CarNotFoundException("Car ID not found within our database");

@@ -17,7 +17,8 @@ public class FakeCarDataAccessService implements CarDAO {
     @Override
     public Car selectCarById(Integer id) {
         for (Car car : db) {    // Loop through cars in list
-            if (car.getId().equals(id)) {
+            if (car.getId().equals(id)) {   // If the car id within the list matches the one being passed through as
+                // an argument, then we can return the car
                 return car;
             }
         }
@@ -32,7 +33,7 @@ public class FakeCarDataAccessService implements CarDAO {
     @Override
     public int insertCar(Car car) {
         db.add(car);
-        return 1;
+        return 1;   // Return 1 as an indicator for a successful insert. Return is needed, value of 1 is our choice.
     }
 
     @Override
